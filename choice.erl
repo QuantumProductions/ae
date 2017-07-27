@@ -10,10 +10,9 @@ create({c, Text, V, O, F}) ->
 init([_Text, V, O, F]) -> 
   {ok, {V, O, F}}.
 
-% make(Pid, Info) ->
-%   Info2 = s:s(Pid, {make, Info}).
-
-operate(_V, '=', F) -> F.
+operate(_V, '=', F) -> F;
+operate(V, '+', F) -> V + F;
+operate(V, '-', F) -> V - F.
 
 handle_call({make, Info}, _, State = {V, O, F}) ->
   Value = maps:get(V, Info),
