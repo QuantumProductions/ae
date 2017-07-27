@@ -1,6 +1,12 @@
 -module(world).
 -compile(export_all).
 
+newPlayerState() ->
+  Here = s_cavern_1,
+  #{here => Here}.
+
+handle_call(new_player_state, _, State) ->
+  {reply, newPlayerState(), State};
 handle_call(_, _, State) ->
   {reply, State, State}.
 
