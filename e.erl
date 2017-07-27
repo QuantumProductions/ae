@@ -9,7 +9,9 @@ add({r, V, O, C, List}, Info) ->
   case requirement:met(V, O, C, Info) of
     true -> a(List, Info);
     false -> no
-  end.
+  end;
+add(Choice = {c, _Text, _ChoicePid}, _Info) ->
+  choice:r(Choice).
 
 % assemble
 a(List, Info) ->
