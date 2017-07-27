@@ -22,11 +22,18 @@ a([H | T], List, Info) ->
     V -> a(T, lists:append(List, [V]), Info)
   end.
 
-basic_test() ->
+basic_requirement_test() ->
   Info = #{gems => 1},
   D = [{r, gems, '>', 0, [<<"You see the outline of an invisible wizard">>, <<"But you can't quite tell what kind of wizard.">>]}],
   R = e:a(D, Info),
   R = [<<"You see the outline of an invisible wizard">>, <<"But you can't quite tell what kind of wizard.">>].
+
+missing_info_key_test() ->
+  Info = #{},
+  D = [{r, gems, '>', 4, [<<"A wizard stands peering at the moon. He appears not to notice you.">>]}],  
+  R = e:a(D, Info),
+  R = [].
+
 
 % basic_test() ->
   % R = e:a([{r, 1, [<<"cavern">>]},
