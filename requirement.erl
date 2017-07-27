@@ -1,5 +1,15 @@
 -module(requirement).
--compile(export_all).
+-export([met/4]).
 
-go(Requirement) ->
-  gen_server:start_link(?MODULE, [Requirement], []).
+met(V, O, C, Info) ->
+  case maps:is_key(V, Info) of
+    false -> false;
+    true -> met(maps:get(V, Info), O, C)
+  end.
+met(V, '>', C) -> V > C;
+met(V, '<', C) -> V < C;
+met(V, '=<', C) -> V =< C;
+met(V, '<=', C) -> V =< C;
+met(V, '>=', C) -> V >= C;
+met(V, '=', C) -> V = C;
+met(V, '!=', C) -> V =/= C.
