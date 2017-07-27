@@ -2,4 +2,5 @@
 -export([d/0]).
 
 d() ->
-  [<<"A wizard stares into the darkness of the cavern.">>].  
+  [<<"You see only the darkness of the cavern.">>,
+  {c, <<"Venture cautiously.">>, here, '=', s_cavern_2}].

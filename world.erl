@@ -1,4 +1,4 @@
--module(comp).
+-module(world).
 -compile(export_all).
 
 handle_call(_, _, State) ->
