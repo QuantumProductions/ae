@@ -1,9 +1,11 @@
 -module(e).
 -export([a/1]).
 
+% player info passed in
+% Next, PlayerInfo ..
 add(B) when is_binary(B) -> B;
-add({r, N, List}) ->
-  case N =< 4 of
+add({r, V, O, C, List}) ->
+  case requirement:met(V, O, C, PlayerInfo) of
     true -> a(List);
     false -> no
   end.
