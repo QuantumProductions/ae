@@ -1,8 +1,11 @@
 -module(a).
 -export([a/1]).
+-compile(export_all).
+-include_lib("eunit/include/eunit.hrl").
 
-add(Choice = {c, _Text, _V, _O, _F}) ->
-  {c, choice:create(Choice)};
+add(Choice = {c, Text, _V, _O, _F}) ->
+  {ok, Pid} = choice:create(Choice),
+  {c, Text, Pid};
 add(Part) -> Part.
 
 % assemble
@@ -17,6 +20,11 @@ a([H | T], List) ->
   end.
 
 simple_test() ->
+  Info = #{here => "cavern"},
+  D = [<<"You see a darkness in the cavern.">>,
+  {c, <<"Venture cautiously.">>, here, '=', "cavern2"}],
+  R = a:a(D),
   [<<"You see a darkness in the cavern.">>,
-  {c, <<"Venture cautiously.">>, where, '=', 'cavern2'}
-  ]
+   {c, <<"Venture cautiously.">>,
+   ChoicePid}] = R,
+  #{here := "cavern2"} = s:s(ChoicePid, {make, Info}).
