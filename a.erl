@@ -5,6 +5,9 @@
 
 add({r, V, O, C, List}) ->
   [{r, V, O, C, a(List)}];
+add({r, V, O, C, List1, List2}) ->
+  [{r, V, O, C, a(List1)},
+    {r, V, requirement:inverse(O), C, a(List2)}];
 add(Choice = {c, Text, _V, _O, _F}) ->
   {ok, Pid} = choice:create(Choice),
   {c, Text, Pid};

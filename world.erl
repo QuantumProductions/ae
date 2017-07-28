@@ -5,11 +5,6 @@ newPlayerState() ->
   Here = s_cavern_1,
   #{here => Here, gems => 0}.
 
-handle_call(new_player_state, _, State) ->
-  {reply, newPlayerState(), State};
-handle_call(_, _, State) ->
-  {reply, State, State}.
-
 default() ->
   default(zones(), #{}).
 default([], Scenes) ->
@@ -27,12 +22,6 @@ loadScenes([H | T], Scenes) ->
   {ok, SceneModule} = compile:file(H),
   AssembledScene = a:a(SceneModule:d()),
   loadScenes(T, maps:put(H, AssembledScene, Scenes)).
-
-init([]) ->
-  {ok, default()}.
-
-go() ->
-  gen_server:start_link(?MODULE, [], []).
 
 zones() ->
   [z_cavern].

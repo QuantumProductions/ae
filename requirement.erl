@@ -1,5 +1,5 @@
 -module(requirement).
--export([met/4]).
+-export([met/4, inverse/1]).
 
 met(V, O, C, Info) ->
   case maps:is_key(V, Info) of
@@ -13,3 +13,11 @@ met(V, '<=', C) -> V =< C;
 met(V, '>=', C) -> V >= C;
 met(V, '=', C) -> V = C;
 met(V, '!=', C) -> V =/= C.
+
+inverse('>') -> '<=';
+inverse('<') -> '>=';
+inverse('=<') -> '>';
+inverse('<=') -> '>';
+inverse('>=') -> '<';
+inverse('=') -> '!=';
+inverse('!=') -> '='.

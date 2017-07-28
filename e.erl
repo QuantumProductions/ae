@@ -6,6 +6,11 @@
 % Next, PlayerInfo ..
 add(L, Info) when is_list(L) -> a(L, Info);
 add(B, _Info) when is_binary(B) -> B; 
+add({r, V, O, C, List1, List2}, Info) ->
+  case requirement:met(V, O, C, Info) of
+    true -> a(List1, Info);
+    false -> a(List2, Info)
+  end;
 add({r, V, O, C, List}, Info) ->
   case requirement:met(V, O, C, Info) of
     true -> a(List, Info);
@@ -44,6 +49,17 @@ met_requirement_test() ->
       [<<"Steal his gemstone?">>]]}],
   R = e:a(D, Info),
   R.                               
+
+else_test() ->
+  Info = #{gems => 1},
+  D = [<<"You stand in a puddle of cool water.">>,
+      {r, gems, '>', 1, [
+        <<"You hear a tone buzzing from your gemstones.">>], 
+        [<<"You cannot fathom where this water poured from.">>]}],
+  A = a:a(D),
+  R = e:a(A, Info),
+  [<<"You stand in a puddle of cool water.">>,
+ <<"You cannot fathom where this water poured from.">>] = R.
 
 % basic_test() ->
   % R = e:a([{r, 1, [<<"cavern">>]},
