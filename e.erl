@@ -2,8 +2,6 @@
 -export([a/2]).
 -include_lib("eunit/include/eunit.hrl").
 
-% player info passed in
-% Next, PlayerInfo ..
 add(L, Info) when is_list(L) -> a(L, Info);
 add(B, _Info) when is_binary(B) -> B; 
 add({r, V, O, C, List1, List2}, Info) ->
