@@ -14,6 +14,9 @@ handle_call({join, Name}, _, {World, Players}) ->
 handle_call({read, Name}, _, State = {_World, Players}) ->
   #{text := Text} = maps:get(Name, Players),
   {reply, Text, State};
+handle_call({read_html, Name}, _, State = {_World, Players}) ->
+  #{text := Text} = maps:get(Name, Players),
+  {reply, html:html(Text), State};
 handle_call({make_choice, Name, ChoicePid}, _, State = {World, Players}) ->
   Info = maps:get(Name, Players),
   case makeChoice(ChoicePid, Info, World) of

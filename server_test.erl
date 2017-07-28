@@ -45,3 +45,10 @@ gem_test() ->
   s:s(S, {make_choice, <<"Sal">>, Choice5}),
   [_, _, {c, _, Choice6}, _,_,_] = s:s(S, {read, <<"Sal">>}),
   #{here := "town_revive"} = s:s(S, {make_choice, <<"Sal">>, Choice6}).
+
+html_test() ->
+  {ok, S} = server:go(),
+  s:s(S, {join, <<"Sal">>}),  
+  HTML = s:s(S, {read_html, <<"Sal">>}),
+  HTML.
+
