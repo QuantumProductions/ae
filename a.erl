@@ -3,6 +3,8 @@
 -compile(export_all).
 -include_lib("eunit/include/eunit.hrl").
 
+add({r, V, O, C, List}) ->
+  [{r, V, O, C, a(List)}];
 add(Choice = {c, Text, _V, _O, _F}) ->
   {ok, Pid} = choice:create(Choice),
   {c, Text, Pid};

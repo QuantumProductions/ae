@@ -4,7 +4,8 @@
 
 % player info passed in
 % Next, PlayerInfo ..
-add(B, _Info) when is_binary(B) -> B;
+add(L, Info) when is_list(L) -> a(L, Info);
+add(B, _Info) when is_binary(B) -> B; 
 add({r, V, O, C, List}, Info) ->
   case requirement:met(V, O, C, Info) of
     true -> a(List, Info);
@@ -36,6 +37,13 @@ missing_info_key_test() ->
   R = e:a(D, Info),
   R = [].
 
+met_requirement_test() ->
+  Info = #{here => test, gems => 4},
+  D = [{r,gems,'>=',2,
+  [<<"A wizard stands peering confusedly into the faint moonlight.">>,
+      [<<"Steal his gemstone?">>]]}],
+  R = e:a(D, Info),
+  R.                               
 
 % basic_test() ->
   % R = e:a([{r, 1, [<<"cavern">>]},
