@@ -3,7 +3,7 @@
 
 met(V, O, C, Info) ->
   case maps:is_key(V, Info) of
-    false -> false;
+    false -> met(0, O, C);
     true -> met(maps:get(V, Info), O, C)
   end.
 met(V, '>', C) -> V > C;

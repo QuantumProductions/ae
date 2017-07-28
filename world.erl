@@ -3,7 +3,7 @@
 
 newPlayerState() ->
   Here = s_cavern_1,
-  #{here => Here}.
+  #{here => Here, gems => 0}.
 
 handle_call(new_player_state, _, State) ->
   {reply, newPlayerState(), State};

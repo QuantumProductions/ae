@@ -21,12 +21,12 @@ choice_test() ->
 
 missing_requirement_test() -> 
   {ok, S} = server:go(),
-  s:s(S, {join, <<"Sal">>}),
+  s:s(S, {join, <<"Sal">>}),  
   [_, {c, _Prompt, Choice}] = s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice}),
   Read2 = [_, {c, _Prompt, Choice2}]= s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice2}),
-  [_Text, {c, _Prompt2, Choice3}] = s:s(S, {read, <<"Sal">>}),
+  [_Text, _, {c, _Prompt2, Choice3}] = s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice3}),
   Read3 = s:s(S, {read, <<"Sal">>}),
   Read2 = Read3.

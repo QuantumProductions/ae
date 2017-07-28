@@ -6,4 +6,8 @@ d() ->
    {r, gems, '>=', 2, [<<"A wizard stands peering confusedly into the faint moonlight.">>,
      {c, <<"Steal his gemstone">>, here, '=', s_town_revive}
    ]},
-  {c, <<"Retreat.">>, here, '=', s_cavern_2}].
+   <<"Your feet bump into what feels like a pile of gems.">>,
+  {c, <<"Retreat1.">>, here, '=', s_cavern_2},
+  {r, gems, '>', 4,
+  [{c, <<"Pick up a gem">>, gems, '+', 1}]}
+  ].
