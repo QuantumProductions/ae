@@ -22,7 +22,7 @@ zone(Name, Scenes) ->
 
 scenes([], Scenes, _) -> Scenes;
 scenes([H | T], Scenes, Name) ->
-  {ok, SceneData} = file:consult("zones/" ++ Name ++ "/" ++ H),
+  {ok, [SceneData | []]} = file:consult("zones/" ++ Name ++ "/" ++ H),
   AssembledScene = a:a(SceneData),
   scenes(T, maps:put(H, AssembledScene, Scenes), Name).
 

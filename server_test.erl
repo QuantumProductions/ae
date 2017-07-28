@@ -44,4 +44,4 @@ gem_test() ->
   s:s(S, {make_choice, <<"Sal">>, Choice5}),
   s:s(S, {make_choice, <<"Sal">>, Choice5}),
   [_, _, {c, _, Choice6}, _,_,_] = s:s(S, {read, <<"Sal">>}),
-  #{here := s_town_revive} = s:s(S, {make_choice, <<"Sal">>, Choice6}).
+  #{here := "town_revive"} = s:s(S, {make_choice, <<"Sal">>, Choice6}).
