@@ -1,0 +1,2 @@
+[<<"You see only the darkness of the cavern.">>,
+  {c, <<"Venture cautiously.">>, here, '=', "cavern2"}].
