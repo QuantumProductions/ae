@@ -36,8 +36,12 @@ gem_test() ->
   s:s(S, {join, <<"Sal">>}),  
   [_, {c, _Prompt, Choice}] = s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice}),
-  Read2 = [_, {c, _Prompt, Choice2}]= s:s(S, {read, <<"Sal">>}),
+  [_, {c, _Prompt, Choice2}]= s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice2}),
   [_Text, _, {c, _Prompt2, _}, {c, _, Choice4}] = s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice4}),
-  Read3 = s:s(S, {read, <<"Sal">>}).
+  [_, _, _, {c, _, Choice5}] = s:s(S, {read, <<"Sal">>}),
+  s:s(S, {make_choice, <<"Sal">>, Choice5}),
+  s:s(S, {make_choice, <<"Sal">>, Choice5}),
+  [_, _, {c, _, Choice6}, _,_,_] = s:s(S, {read, <<"Sal">>}),
+  #{here := s_town_revive} = s:s(S, {make_choice, <<"Sal">>, Choice6}).
