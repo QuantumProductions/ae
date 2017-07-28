@@ -32,7 +32,7 @@ missing_requirement_test() ->
   Read2 = Read3.
 
 gem_test() ->
-    {ok, S} = server:go(),
+  {ok, S} = server:go(),
   s:s(S, {join, <<"Sal">>}),  
   [_, {c, _Prompt, Choice}] = s:s(S, {read, <<"Sal">>}),
   s:s(S, {make_choice, <<"Sal">>, Choice}),
