@@ -7,12 +7,13 @@ handle_call({join, Name}, _, {World, Players}) ->
   StartingPlayerState = world:newPlayerState(),
   Here = maps:get(here, StartingPlayerState),
   ZoneData = maps:get(Here, World),
-  % Status = 
-  % TODO: e:a(Data)
-  % ignoring any kind of additional UI, simple!
-  StartingPlayerStateWithText = maps:put(text, ZoneData, StartingPlayerState),
+  ZoneDataEvaluated = e:a(ZoneData, StartingPlayerState),
+  StartingPlayerStateWithText = maps:put(text, ZoneDataEvaluated, StartingPlayerState),
   Players2 = maps:put(Name, StartingPlayerStateWithText, Players),
-  {reply, StartingPlayerState, {World, Players2}}.
+  {reply, StartingPlayerState, {World, Players2}};
+handle_call({read, Name}, _, State = {_World, Players}) ->
+  #{text := Text} = maps:get(Name, Players),
+  {reply, Text, State}.
 
 default() ->
   {world:default(), #{}}.
